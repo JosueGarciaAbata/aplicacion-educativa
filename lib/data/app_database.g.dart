@@ -1531,6 +1531,1008 @@ class ProgressCompanion extends UpdateCompanion<ProgressData> {
   }
 }
 
+class $ContentActivityDetailsTable extends ContentActivityDetails
+    with TableInfo<$ContentActivityDetailsTable, ContentActivityDetail> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $ContentActivityDetailsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _contentIdMeta = const VerificationMeta(
+    'contentId',
+  );
+  @override
+  late final GeneratedColumn<int> contentId = GeneratedColumn<int>(
+    'content_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES contents (id)',
+    ),
+  );
+  static const VerificationMeta _subjectLabelMeta = const VerificationMeta(
+    'subjectLabel',
+  );
+  @override
+  late final GeneratedColumn<String> subjectLabel = GeneratedColumn<String>(
+    'subject_label',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _activityLabelMeta = const VerificationMeta(
+    'activityLabel',
+  );
+  @override
+  late final GeneratedColumn<String> activityLabel = GeneratedColumn<String>(
+    'activity_label',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _ctaLabelMeta = const VerificationMeta(
+    'ctaLabel',
+  );
+  @override
+  late final GeneratedColumn<String> ctaLabel = GeneratedColumn<String>(
+    'cta_label',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _difficultyMeta = const VerificationMeta(
+    'difficulty',
+  );
+  @override
+  late final GeneratedColumn<String> difficulty = GeneratedColumn<String>(
+    'difficulty',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _questionCountMeta = const VerificationMeta(
+    'questionCount',
+  );
+  @override
+  late final GeneratedColumn<int> questionCount = GeneratedColumn<int>(
+    'question_count',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _estimatedMinutesMeta = const VerificationMeta(
+    'estimatedMinutes',
+  );
+  @override
+  late final GeneratedColumn<int> estimatedMinutes = GeneratedColumn<int>(
+    'estimated_minutes',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _learningGoalsMeta = const VerificationMeta(
+    'learningGoals',
+  );
+  @override
+  late final GeneratedColumn<String> learningGoals = GeneratedColumn<String>(
+    'learning_goals',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    contentId,
+    subjectLabel,
+    activityLabel,
+    ctaLabel,
+    difficulty,
+    questionCount,
+    estimatedMinutes,
+    learningGoals,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'content_activity_details';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<ContentActivityDetail> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('content_id')) {
+      context.handle(
+        _contentIdMeta,
+        contentId.isAcceptableOrUnknown(data['content_id']!, _contentIdMeta),
+      );
+    }
+    if (data.containsKey('subject_label')) {
+      context.handle(
+        _subjectLabelMeta,
+        subjectLabel.isAcceptableOrUnknown(
+          data['subject_label']!,
+          _subjectLabelMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_subjectLabelMeta);
+    }
+    if (data.containsKey('activity_label')) {
+      context.handle(
+        _activityLabelMeta,
+        activityLabel.isAcceptableOrUnknown(
+          data['activity_label']!,
+          _activityLabelMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_activityLabelMeta);
+    }
+    if (data.containsKey('cta_label')) {
+      context.handle(
+        _ctaLabelMeta,
+        ctaLabel.isAcceptableOrUnknown(data['cta_label']!, _ctaLabelMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_ctaLabelMeta);
+    }
+    if (data.containsKey('difficulty')) {
+      context.handle(
+        _difficultyMeta,
+        difficulty.isAcceptableOrUnknown(data['difficulty']!, _difficultyMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_difficultyMeta);
+    }
+    if (data.containsKey('question_count')) {
+      context.handle(
+        _questionCountMeta,
+        questionCount.isAcceptableOrUnknown(
+          data['question_count']!,
+          _questionCountMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_questionCountMeta);
+    }
+    if (data.containsKey('estimated_minutes')) {
+      context.handle(
+        _estimatedMinutesMeta,
+        estimatedMinutes.isAcceptableOrUnknown(
+          data['estimated_minutes']!,
+          _estimatedMinutesMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_estimatedMinutesMeta);
+    }
+    if (data.containsKey('learning_goals')) {
+      context.handle(
+        _learningGoalsMeta,
+        learningGoals.isAcceptableOrUnknown(
+          data['learning_goals']!,
+          _learningGoalsMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_learningGoalsMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {contentId};
+  @override
+  ContentActivityDetail map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return ContentActivityDetail(
+      contentId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}content_id'],
+      )!,
+      subjectLabel: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}subject_label'],
+      )!,
+      activityLabel: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}activity_label'],
+      )!,
+      ctaLabel: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}cta_label'],
+      )!,
+      difficulty: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}difficulty'],
+      )!,
+      questionCount: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}question_count'],
+      )!,
+      estimatedMinutes: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}estimated_minutes'],
+      )!,
+      learningGoals: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}learning_goals'],
+      )!,
+    );
+  }
+
+  @override
+  $ContentActivityDetailsTable createAlias(String alias) {
+    return $ContentActivityDetailsTable(attachedDatabase, alias);
+  }
+}
+
+class ContentActivityDetail extends DataClass
+    implements Insertable<ContentActivityDetail> {
+  final int contentId;
+  final String subjectLabel;
+  final String activityLabel;
+  final String ctaLabel;
+  final String difficulty;
+  final int questionCount;
+  final int estimatedMinutes;
+  final String learningGoals;
+  const ContentActivityDetail({
+    required this.contentId,
+    required this.subjectLabel,
+    required this.activityLabel,
+    required this.ctaLabel,
+    required this.difficulty,
+    required this.questionCount,
+    required this.estimatedMinutes,
+    required this.learningGoals,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['content_id'] = Variable<int>(contentId);
+    map['subject_label'] = Variable<String>(subjectLabel);
+    map['activity_label'] = Variable<String>(activityLabel);
+    map['cta_label'] = Variable<String>(ctaLabel);
+    map['difficulty'] = Variable<String>(difficulty);
+    map['question_count'] = Variable<int>(questionCount);
+    map['estimated_minutes'] = Variable<int>(estimatedMinutes);
+    map['learning_goals'] = Variable<String>(learningGoals);
+    return map;
+  }
+
+  ContentActivityDetailsCompanion toCompanion(bool nullToAbsent) {
+    return ContentActivityDetailsCompanion(
+      contentId: Value(contentId),
+      subjectLabel: Value(subjectLabel),
+      activityLabel: Value(activityLabel),
+      ctaLabel: Value(ctaLabel),
+      difficulty: Value(difficulty),
+      questionCount: Value(questionCount),
+      estimatedMinutes: Value(estimatedMinutes),
+      learningGoals: Value(learningGoals),
+    );
+  }
+
+  factory ContentActivityDetail.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return ContentActivityDetail(
+      contentId: serializer.fromJson<int>(json['contentId']),
+      subjectLabel: serializer.fromJson<String>(json['subjectLabel']),
+      activityLabel: serializer.fromJson<String>(json['activityLabel']),
+      ctaLabel: serializer.fromJson<String>(json['ctaLabel']),
+      difficulty: serializer.fromJson<String>(json['difficulty']),
+      questionCount: serializer.fromJson<int>(json['questionCount']),
+      estimatedMinutes: serializer.fromJson<int>(json['estimatedMinutes']),
+      learningGoals: serializer.fromJson<String>(json['learningGoals']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'contentId': serializer.toJson<int>(contentId),
+      'subjectLabel': serializer.toJson<String>(subjectLabel),
+      'activityLabel': serializer.toJson<String>(activityLabel),
+      'ctaLabel': serializer.toJson<String>(ctaLabel),
+      'difficulty': serializer.toJson<String>(difficulty),
+      'questionCount': serializer.toJson<int>(questionCount),
+      'estimatedMinutes': serializer.toJson<int>(estimatedMinutes),
+      'learningGoals': serializer.toJson<String>(learningGoals),
+    };
+  }
+
+  ContentActivityDetail copyWith({
+    int? contentId,
+    String? subjectLabel,
+    String? activityLabel,
+    String? ctaLabel,
+    String? difficulty,
+    int? questionCount,
+    int? estimatedMinutes,
+    String? learningGoals,
+  }) => ContentActivityDetail(
+    contentId: contentId ?? this.contentId,
+    subjectLabel: subjectLabel ?? this.subjectLabel,
+    activityLabel: activityLabel ?? this.activityLabel,
+    ctaLabel: ctaLabel ?? this.ctaLabel,
+    difficulty: difficulty ?? this.difficulty,
+    questionCount: questionCount ?? this.questionCount,
+    estimatedMinutes: estimatedMinutes ?? this.estimatedMinutes,
+    learningGoals: learningGoals ?? this.learningGoals,
+  );
+  ContentActivityDetail copyWithCompanion(
+    ContentActivityDetailsCompanion data,
+  ) {
+    return ContentActivityDetail(
+      contentId: data.contentId.present ? data.contentId.value : this.contentId,
+      subjectLabel: data.subjectLabel.present
+          ? data.subjectLabel.value
+          : this.subjectLabel,
+      activityLabel: data.activityLabel.present
+          ? data.activityLabel.value
+          : this.activityLabel,
+      ctaLabel: data.ctaLabel.present ? data.ctaLabel.value : this.ctaLabel,
+      difficulty: data.difficulty.present
+          ? data.difficulty.value
+          : this.difficulty,
+      questionCount: data.questionCount.present
+          ? data.questionCount.value
+          : this.questionCount,
+      estimatedMinutes: data.estimatedMinutes.present
+          ? data.estimatedMinutes.value
+          : this.estimatedMinutes,
+      learningGoals: data.learningGoals.present
+          ? data.learningGoals.value
+          : this.learningGoals,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ContentActivityDetail(')
+          ..write('contentId: $contentId, ')
+          ..write('subjectLabel: $subjectLabel, ')
+          ..write('activityLabel: $activityLabel, ')
+          ..write('ctaLabel: $ctaLabel, ')
+          ..write('difficulty: $difficulty, ')
+          ..write('questionCount: $questionCount, ')
+          ..write('estimatedMinutes: $estimatedMinutes, ')
+          ..write('learningGoals: $learningGoals')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    contentId,
+    subjectLabel,
+    activityLabel,
+    ctaLabel,
+    difficulty,
+    questionCount,
+    estimatedMinutes,
+    learningGoals,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is ContentActivityDetail &&
+          other.contentId == this.contentId &&
+          other.subjectLabel == this.subjectLabel &&
+          other.activityLabel == this.activityLabel &&
+          other.ctaLabel == this.ctaLabel &&
+          other.difficulty == this.difficulty &&
+          other.questionCount == this.questionCount &&
+          other.estimatedMinutes == this.estimatedMinutes &&
+          other.learningGoals == this.learningGoals);
+}
+
+class ContentActivityDetailsCompanion
+    extends UpdateCompanion<ContentActivityDetail> {
+  final Value<int> contentId;
+  final Value<String> subjectLabel;
+  final Value<String> activityLabel;
+  final Value<String> ctaLabel;
+  final Value<String> difficulty;
+  final Value<int> questionCount;
+  final Value<int> estimatedMinutes;
+  final Value<String> learningGoals;
+  const ContentActivityDetailsCompanion({
+    this.contentId = const Value.absent(),
+    this.subjectLabel = const Value.absent(),
+    this.activityLabel = const Value.absent(),
+    this.ctaLabel = const Value.absent(),
+    this.difficulty = const Value.absent(),
+    this.questionCount = const Value.absent(),
+    this.estimatedMinutes = const Value.absent(),
+    this.learningGoals = const Value.absent(),
+  });
+  ContentActivityDetailsCompanion.insert({
+    this.contentId = const Value.absent(),
+    required String subjectLabel,
+    required String activityLabel,
+    required String ctaLabel,
+    required String difficulty,
+    required int questionCount,
+    required int estimatedMinutes,
+    required String learningGoals,
+  }) : subjectLabel = Value(subjectLabel),
+       activityLabel = Value(activityLabel),
+       ctaLabel = Value(ctaLabel),
+       difficulty = Value(difficulty),
+       questionCount = Value(questionCount),
+       estimatedMinutes = Value(estimatedMinutes),
+       learningGoals = Value(learningGoals);
+  static Insertable<ContentActivityDetail> custom({
+    Expression<int>? contentId,
+    Expression<String>? subjectLabel,
+    Expression<String>? activityLabel,
+    Expression<String>? ctaLabel,
+    Expression<String>? difficulty,
+    Expression<int>? questionCount,
+    Expression<int>? estimatedMinutes,
+    Expression<String>? learningGoals,
+  }) {
+    return RawValuesInsertable({
+      if (contentId != null) 'content_id': contentId,
+      if (subjectLabel != null) 'subject_label': subjectLabel,
+      if (activityLabel != null) 'activity_label': activityLabel,
+      if (ctaLabel != null) 'cta_label': ctaLabel,
+      if (difficulty != null) 'difficulty': difficulty,
+      if (questionCount != null) 'question_count': questionCount,
+      if (estimatedMinutes != null) 'estimated_minutes': estimatedMinutes,
+      if (learningGoals != null) 'learning_goals': learningGoals,
+    });
+  }
+
+  ContentActivityDetailsCompanion copyWith({
+    Value<int>? contentId,
+    Value<String>? subjectLabel,
+    Value<String>? activityLabel,
+    Value<String>? ctaLabel,
+    Value<String>? difficulty,
+    Value<int>? questionCount,
+    Value<int>? estimatedMinutes,
+    Value<String>? learningGoals,
+  }) {
+    return ContentActivityDetailsCompanion(
+      contentId: contentId ?? this.contentId,
+      subjectLabel: subjectLabel ?? this.subjectLabel,
+      activityLabel: activityLabel ?? this.activityLabel,
+      ctaLabel: ctaLabel ?? this.ctaLabel,
+      difficulty: difficulty ?? this.difficulty,
+      questionCount: questionCount ?? this.questionCount,
+      estimatedMinutes: estimatedMinutes ?? this.estimatedMinutes,
+      learningGoals: learningGoals ?? this.learningGoals,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (contentId.present) {
+      map['content_id'] = Variable<int>(contentId.value);
+    }
+    if (subjectLabel.present) {
+      map['subject_label'] = Variable<String>(subjectLabel.value);
+    }
+    if (activityLabel.present) {
+      map['activity_label'] = Variable<String>(activityLabel.value);
+    }
+    if (ctaLabel.present) {
+      map['cta_label'] = Variable<String>(ctaLabel.value);
+    }
+    if (difficulty.present) {
+      map['difficulty'] = Variable<String>(difficulty.value);
+    }
+    if (questionCount.present) {
+      map['question_count'] = Variable<int>(questionCount.value);
+    }
+    if (estimatedMinutes.present) {
+      map['estimated_minutes'] = Variable<int>(estimatedMinutes.value);
+    }
+    if (learningGoals.present) {
+      map['learning_goals'] = Variable<String>(learningGoals.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ContentActivityDetailsCompanion(')
+          ..write('contentId: $contentId, ')
+          ..write('subjectLabel: $subjectLabel, ')
+          ..write('activityLabel: $activityLabel, ')
+          ..write('ctaLabel: $ctaLabel, ')
+          ..write('difficulty: $difficulty, ')
+          ..write('questionCount: $questionCount, ')
+          ..write('estimatedMinutes: $estimatedMinutes, ')
+          ..write('learningGoals: $learningGoals')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $ContentQuestionsTable extends ContentQuestions
+    with TableInfo<$ContentQuestionsTable, ContentQuestion> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $ContentQuestionsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
+  static const VerificationMeta _contentIdMeta = const VerificationMeta(
+    'contentId',
+  );
+  @override
+  late final GeneratedColumn<int> contentId = GeneratedColumn<int>(
+    'content_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES contents (id)',
+    ),
+  );
+  static const VerificationMeta _sortOrderMeta = const VerificationMeta(
+    'sortOrder',
+  );
+  @override
+  late final GeneratedColumn<int> sortOrder = GeneratedColumn<int>(
+    'sort_order',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _typeLabelMeta = const VerificationMeta(
+    'typeLabel',
+  );
+  @override
+  late final GeneratedColumn<String> typeLabel = GeneratedColumn<String>(
+    'type_label',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _promptMeta = const VerificationMeta('prompt');
+  @override
+  late final GeneratedColumn<String> prompt = GeneratedColumn<String>(
+    'prompt',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _optionsTextMeta = const VerificationMeta(
+    'optionsText',
+  );
+  @override
+  late final GeneratedColumn<String> optionsText = GeneratedColumn<String>(
+    'options_text',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _correctIndexMeta = const VerificationMeta(
+    'correctIndex',
+  );
+  @override
+  late final GeneratedColumn<int> correctIndex = GeneratedColumn<int>(
+    'correct_index',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    contentId,
+    sortOrder,
+    typeLabel,
+    prompt,
+    optionsText,
+    correctIndex,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'content_questions';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<ContentQuestion> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('content_id')) {
+      context.handle(
+        _contentIdMeta,
+        contentId.isAcceptableOrUnknown(data['content_id']!, _contentIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_contentIdMeta);
+    }
+    if (data.containsKey('sort_order')) {
+      context.handle(
+        _sortOrderMeta,
+        sortOrder.isAcceptableOrUnknown(data['sort_order']!, _sortOrderMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_sortOrderMeta);
+    }
+    if (data.containsKey('type_label')) {
+      context.handle(
+        _typeLabelMeta,
+        typeLabel.isAcceptableOrUnknown(data['type_label']!, _typeLabelMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_typeLabelMeta);
+    }
+    if (data.containsKey('prompt')) {
+      context.handle(
+        _promptMeta,
+        prompt.isAcceptableOrUnknown(data['prompt']!, _promptMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_promptMeta);
+    }
+    if (data.containsKey('options_text')) {
+      context.handle(
+        _optionsTextMeta,
+        optionsText.isAcceptableOrUnknown(
+          data['options_text']!,
+          _optionsTextMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_optionsTextMeta);
+    }
+    if (data.containsKey('correct_index')) {
+      context.handle(
+        _correctIndexMeta,
+        correctIndex.isAcceptableOrUnknown(
+          data['correct_index']!,
+          _correctIndexMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_correctIndexMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  ContentQuestion map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return ContentQuestion(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      contentId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}content_id'],
+      )!,
+      sortOrder: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}sort_order'],
+      )!,
+      typeLabel: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}type_label'],
+      )!,
+      prompt: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}prompt'],
+      )!,
+      optionsText: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}options_text'],
+      )!,
+      correctIndex: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}correct_index'],
+      )!,
+    );
+  }
+
+  @override
+  $ContentQuestionsTable createAlias(String alias) {
+    return $ContentQuestionsTable(attachedDatabase, alias);
+  }
+}
+
+class ContentQuestion extends DataClass implements Insertable<ContentQuestion> {
+  final int id;
+  final int contentId;
+  final int sortOrder;
+  final String typeLabel;
+  final String prompt;
+  final String optionsText;
+  final int correctIndex;
+  const ContentQuestion({
+    required this.id,
+    required this.contentId,
+    required this.sortOrder,
+    required this.typeLabel,
+    required this.prompt,
+    required this.optionsText,
+    required this.correctIndex,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['content_id'] = Variable<int>(contentId);
+    map['sort_order'] = Variable<int>(sortOrder);
+    map['type_label'] = Variable<String>(typeLabel);
+    map['prompt'] = Variable<String>(prompt);
+    map['options_text'] = Variable<String>(optionsText);
+    map['correct_index'] = Variable<int>(correctIndex);
+    return map;
+  }
+
+  ContentQuestionsCompanion toCompanion(bool nullToAbsent) {
+    return ContentQuestionsCompanion(
+      id: Value(id),
+      contentId: Value(contentId),
+      sortOrder: Value(sortOrder),
+      typeLabel: Value(typeLabel),
+      prompt: Value(prompt),
+      optionsText: Value(optionsText),
+      correctIndex: Value(correctIndex),
+    );
+  }
+
+  factory ContentQuestion.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return ContentQuestion(
+      id: serializer.fromJson<int>(json['id']),
+      contentId: serializer.fromJson<int>(json['contentId']),
+      sortOrder: serializer.fromJson<int>(json['sortOrder']),
+      typeLabel: serializer.fromJson<String>(json['typeLabel']),
+      prompt: serializer.fromJson<String>(json['prompt']),
+      optionsText: serializer.fromJson<String>(json['optionsText']),
+      correctIndex: serializer.fromJson<int>(json['correctIndex']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'contentId': serializer.toJson<int>(contentId),
+      'sortOrder': serializer.toJson<int>(sortOrder),
+      'typeLabel': serializer.toJson<String>(typeLabel),
+      'prompt': serializer.toJson<String>(prompt),
+      'optionsText': serializer.toJson<String>(optionsText),
+      'correctIndex': serializer.toJson<int>(correctIndex),
+    };
+  }
+
+  ContentQuestion copyWith({
+    int? id,
+    int? contentId,
+    int? sortOrder,
+    String? typeLabel,
+    String? prompt,
+    String? optionsText,
+    int? correctIndex,
+  }) => ContentQuestion(
+    id: id ?? this.id,
+    contentId: contentId ?? this.contentId,
+    sortOrder: sortOrder ?? this.sortOrder,
+    typeLabel: typeLabel ?? this.typeLabel,
+    prompt: prompt ?? this.prompt,
+    optionsText: optionsText ?? this.optionsText,
+    correctIndex: correctIndex ?? this.correctIndex,
+  );
+  ContentQuestion copyWithCompanion(ContentQuestionsCompanion data) {
+    return ContentQuestion(
+      id: data.id.present ? data.id.value : this.id,
+      contentId: data.contentId.present ? data.contentId.value : this.contentId,
+      sortOrder: data.sortOrder.present ? data.sortOrder.value : this.sortOrder,
+      typeLabel: data.typeLabel.present ? data.typeLabel.value : this.typeLabel,
+      prompt: data.prompt.present ? data.prompt.value : this.prompt,
+      optionsText: data.optionsText.present
+          ? data.optionsText.value
+          : this.optionsText,
+      correctIndex: data.correctIndex.present
+          ? data.correctIndex.value
+          : this.correctIndex,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ContentQuestion(')
+          ..write('id: $id, ')
+          ..write('contentId: $contentId, ')
+          ..write('sortOrder: $sortOrder, ')
+          ..write('typeLabel: $typeLabel, ')
+          ..write('prompt: $prompt, ')
+          ..write('optionsText: $optionsText, ')
+          ..write('correctIndex: $correctIndex')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    id,
+    contentId,
+    sortOrder,
+    typeLabel,
+    prompt,
+    optionsText,
+    correctIndex,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is ContentQuestion &&
+          other.id == this.id &&
+          other.contentId == this.contentId &&
+          other.sortOrder == this.sortOrder &&
+          other.typeLabel == this.typeLabel &&
+          other.prompt == this.prompt &&
+          other.optionsText == this.optionsText &&
+          other.correctIndex == this.correctIndex);
+}
+
+class ContentQuestionsCompanion extends UpdateCompanion<ContentQuestion> {
+  final Value<int> id;
+  final Value<int> contentId;
+  final Value<int> sortOrder;
+  final Value<String> typeLabel;
+  final Value<String> prompt;
+  final Value<String> optionsText;
+  final Value<int> correctIndex;
+  const ContentQuestionsCompanion({
+    this.id = const Value.absent(),
+    this.contentId = const Value.absent(),
+    this.sortOrder = const Value.absent(),
+    this.typeLabel = const Value.absent(),
+    this.prompt = const Value.absent(),
+    this.optionsText = const Value.absent(),
+    this.correctIndex = const Value.absent(),
+  });
+  ContentQuestionsCompanion.insert({
+    this.id = const Value.absent(),
+    required int contentId,
+    required int sortOrder,
+    required String typeLabel,
+    required String prompt,
+    required String optionsText,
+    required int correctIndex,
+  }) : contentId = Value(contentId),
+       sortOrder = Value(sortOrder),
+       typeLabel = Value(typeLabel),
+       prompt = Value(prompt),
+       optionsText = Value(optionsText),
+       correctIndex = Value(correctIndex);
+  static Insertable<ContentQuestion> custom({
+    Expression<int>? id,
+    Expression<int>? contentId,
+    Expression<int>? sortOrder,
+    Expression<String>? typeLabel,
+    Expression<String>? prompt,
+    Expression<String>? optionsText,
+    Expression<int>? correctIndex,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (contentId != null) 'content_id': contentId,
+      if (sortOrder != null) 'sort_order': sortOrder,
+      if (typeLabel != null) 'type_label': typeLabel,
+      if (prompt != null) 'prompt': prompt,
+      if (optionsText != null) 'options_text': optionsText,
+      if (correctIndex != null) 'correct_index': correctIndex,
+    });
+  }
+
+  ContentQuestionsCompanion copyWith({
+    Value<int>? id,
+    Value<int>? contentId,
+    Value<int>? sortOrder,
+    Value<String>? typeLabel,
+    Value<String>? prompt,
+    Value<String>? optionsText,
+    Value<int>? correctIndex,
+  }) {
+    return ContentQuestionsCompanion(
+      id: id ?? this.id,
+      contentId: contentId ?? this.contentId,
+      sortOrder: sortOrder ?? this.sortOrder,
+      typeLabel: typeLabel ?? this.typeLabel,
+      prompt: prompt ?? this.prompt,
+      optionsText: optionsText ?? this.optionsText,
+      correctIndex: correctIndex ?? this.correctIndex,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (contentId.present) {
+      map['content_id'] = Variable<int>(contentId.value);
+    }
+    if (sortOrder.present) {
+      map['sort_order'] = Variable<int>(sortOrder.value);
+    }
+    if (typeLabel.present) {
+      map['type_label'] = Variable<String>(typeLabel.value);
+    }
+    if (prompt.present) {
+      map['prompt'] = Variable<String>(prompt.value);
+    }
+    if (optionsText.present) {
+      map['options_text'] = Variable<String>(optionsText.value);
+    }
+    if (correctIndex.present) {
+      map['correct_index'] = Variable<int>(correctIndex.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ContentQuestionsCompanion(')
+          ..write('id: $id, ')
+          ..write('contentId: $contentId, ')
+          ..write('sortOrder: $sortOrder, ')
+          ..write('typeLabel: $typeLabel, ')
+          ..write('prompt: $prompt, ')
+          ..write('optionsText: $optionsText, ')
+          ..write('correctIndex: $correctIndex')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -1538,6 +2540,11 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $ContentsTable contents = $ContentsTable(this);
   late final $NewsTable news = $NewsTable(this);
   late final $ProgressTable progress = $ProgressTable(this);
+  late final $ContentActivityDetailsTable contentActivityDetails =
+      $ContentActivityDetailsTable(this);
+  late final $ContentQuestionsTable contentQuestions = $ContentQuestionsTable(
+    this,
+  );
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -1547,6 +2554,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     contents,
     news,
     progress,
+    contentActivityDetails,
+    contentQuestions,
   ];
 }
 
@@ -1876,6 +2885,57 @@ final class $$ContentsTableReferences
       manager.$state.copyWith(prefetchedData: cache),
     );
   }
+
+  static MultiTypedResultKey<
+    $ContentActivityDetailsTable,
+    List<ContentActivityDetail>
+  >
+  _contentActivityDetailsRefsTable(_$AppDatabase db) =>
+      MultiTypedResultKey.fromTable(
+        db.contentActivityDetails,
+        aliasName: $_aliasNameGenerator(
+          db.contents.id,
+          db.contentActivityDetails.contentId,
+        ),
+      );
+
+  $$ContentActivityDetailsTableProcessedTableManager
+  get contentActivityDetailsRefs {
+    final manager = $$ContentActivityDetailsTableTableManager(
+      $_db,
+      $_db.contentActivityDetails,
+    ).filter((f) => f.contentId.id.sqlEquals($_itemColumn<int>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(
+      _contentActivityDetailsRefsTable($_db),
+    );
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: cache),
+    );
+  }
+
+  static MultiTypedResultKey<$ContentQuestionsTable, List<ContentQuestion>>
+  _contentQuestionsRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
+    db.contentQuestions,
+    aliasName: $_aliasNameGenerator(
+      db.contents.id,
+      db.contentQuestions.contentId,
+    ),
+  );
+
+  $$ContentQuestionsTableProcessedTableManager get contentQuestionsRefs {
+    final manager = $$ContentQuestionsTableTableManager(
+      $_db,
+      $_db.contentQuestions,
+    ).filter((f) => f.contentId.id.sqlEquals($_itemColumn<int>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(
+      _contentQuestionsRefsTable($_db),
+    );
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: cache),
+    );
+  }
 }
 
 class $$ContentsTableFilterComposer
@@ -1938,6 +2998,57 @@ class $$ContentsTableFilterComposer
           }) => $$ProgressTableFilterComposer(
             $db: $db,
             $table: $db.progress,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
+
+  Expression<bool> contentActivityDetailsRefs(
+    Expression<bool> Function($$ContentActivityDetailsTableFilterComposer f) f,
+  ) {
+    final $$ContentActivityDetailsTableFilterComposer composer =
+        $composerBuilder(
+          composer: this,
+          getCurrentColumn: (t) => t.id,
+          referencedTable: $db.contentActivityDetails,
+          getReferencedColumn: (t) => t.contentId,
+          builder:
+              (
+                joinBuilder, {
+                $addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer,
+              }) => $$ContentActivityDetailsTableFilterComposer(
+                $db: $db,
+                $table: $db.contentActivityDetails,
+                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+                joinBuilder: joinBuilder,
+                $removeJoinBuilderFromRootComposer:
+                    $removeJoinBuilderFromRootComposer,
+              ),
+        );
+    return f(composer);
+  }
+
+  Expression<bool> contentQuestionsRefs(
+    Expression<bool> Function($$ContentQuestionsTableFilterComposer f) f,
+  ) {
+    final $$ContentQuestionsTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.contentQuestions,
+      getReferencedColumn: (t) => t.contentId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ContentQuestionsTableFilterComposer(
+            $db: $db,
+            $table: $db.contentQuestions,
             $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
             joinBuilder: joinBuilder,
             $removeJoinBuilderFromRootComposer:
@@ -2051,6 +3162,57 @@ class $$ContentsTableAnnotationComposer
     );
     return f(composer);
   }
+
+  Expression<T> contentActivityDetailsRefs<T extends Object>(
+    Expression<T> Function($$ContentActivityDetailsTableAnnotationComposer a) f,
+  ) {
+    final $$ContentActivityDetailsTableAnnotationComposer composer =
+        $composerBuilder(
+          composer: this,
+          getCurrentColumn: (t) => t.id,
+          referencedTable: $db.contentActivityDetails,
+          getReferencedColumn: (t) => t.contentId,
+          builder:
+              (
+                joinBuilder, {
+                $addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer,
+              }) => $$ContentActivityDetailsTableAnnotationComposer(
+                $db: $db,
+                $table: $db.contentActivityDetails,
+                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+                joinBuilder: joinBuilder,
+                $removeJoinBuilderFromRootComposer:
+                    $removeJoinBuilderFromRootComposer,
+              ),
+        );
+    return f(composer);
+  }
+
+  Expression<T> contentQuestionsRefs<T extends Object>(
+    Expression<T> Function($$ContentQuestionsTableAnnotationComposer a) f,
+  ) {
+    final $$ContentQuestionsTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.contentQuestions,
+      getReferencedColumn: (t) => t.contentId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ContentQuestionsTableAnnotationComposer(
+            $db: $db,
+            $table: $db.contentQuestions,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
 }
 
 class $$ContentsTableTableManager
@@ -2066,7 +3228,11 @@ class $$ContentsTableTableManager
           $$ContentsTableUpdateCompanionBuilder,
           (Content, $$ContentsTableReferences),
           Content,
-          PrefetchHooks Function({bool progressRefs})
+          PrefetchHooks Function({
+            bool progressRefs,
+            bool contentActivityDetailsRefs,
+            bool contentQuestionsRefs,
+          })
         > {
   $$ContentsTableTableManager(_$AppDatabase db, $ContentsTable table)
     : super(
@@ -2123,32 +3289,89 @@ class $$ContentsTableTableManager
                 ),
               )
               .toList(),
-          prefetchHooksCallback: ({progressRefs = false}) {
-            return PrefetchHooks(
-              db: db,
-              explicitlyWatchedTables: [if (progressRefs) db.progress],
-              addJoins: null,
-              getPrefetchedDataCallback: (items) async {
-                return [
-                  if (progressRefs)
-                    await $_getPrefetchedData<
-                      Content,
-                      $ContentsTable,
-                      ProgressData
-                    >(
-                      currentTable: table,
-                      referencedTable: $$ContentsTableReferences
-                          ._progressRefsTable(db),
-                      managerFromTypedResult: (p0) =>
-                          $$ContentsTableReferences(db, table, p0).progressRefs,
-                      referencedItemsForCurrentItem: (item, referencedItems) =>
-                          referencedItems.where((e) => e.contentId == item.id),
-                      typedResults: items,
-                    ),
-                ];
+          prefetchHooksCallback:
+              ({
+                progressRefs = false,
+                contentActivityDetailsRefs = false,
+                contentQuestionsRefs = false,
+              }) {
+                return PrefetchHooks(
+                  db: db,
+                  explicitlyWatchedTables: [
+                    if (progressRefs) db.progress,
+                    if (contentActivityDetailsRefs) db.contentActivityDetails,
+                    if (contentQuestionsRefs) db.contentQuestions,
+                  ],
+                  addJoins: null,
+                  getPrefetchedDataCallback: (items) async {
+                    return [
+                      if (progressRefs)
+                        await $_getPrefetchedData<
+                          Content,
+                          $ContentsTable,
+                          ProgressData
+                        >(
+                          currentTable: table,
+                          referencedTable: $$ContentsTableReferences
+                              ._progressRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$ContentsTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).progressRefs,
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.contentId == item.id,
+                              ),
+                          typedResults: items,
+                        ),
+                      if (contentActivityDetailsRefs)
+                        await $_getPrefetchedData<
+                          Content,
+                          $ContentsTable,
+                          ContentActivityDetail
+                        >(
+                          currentTable: table,
+                          referencedTable: $$ContentsTableReferences
+                              ._contentActivityDetailsRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$ContentsTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).contentActivityDetailsRefs,
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.contentId == item.id,
+                              ),
+                          typedResults: items,
+                        ),
+                      if (contentQuestionsRefs)
+                        await $_getPrefetchedData<
+                          Content,
+                          $ContentsTable,
+                          ContentQuestion
+                        >(
+                          currentTable: table,
+                          referencedTable: $$ContentsTableReferences
+                              ._contentQuestionsRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$ContentsTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).contentQuestionsRefs,
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.contentId == item.id,
+                              ),
+                          typedResults: items,
+                        ),
+                    ];
+                  },
+                );
               },
-            );
-          },
         ),
       );
 }
@@ -2165,7 +3388,11 @@ typedef $$ContentsTableProcessedTableManager =
       $$ContentsTableUpdateCompanionBuilder,
       (Content, $$ContentsTableReferences),
       Content,
-      PrefetchHooks Function({bool progressRefs})
+      PrefetchHooks Function({
+        bool progressRefs,
+        bool contentActivityDetailsRefs,
+        bool contentQuestionsRefs,
+      })
     >;
 typedef $$NewsTableCreateCompanionBuilder =
     NewsCompanion Function({
@@ -2755,6 +3982,777 @@ typedef $$ProgressTableProcessedTableManager =
       ProgressData,
       PrefetchHooks Function({bool userId, bool contentId})
     >;
+typedef $$ContentActivityDetailsTableCreateCompanionBuilder =
+    ContentActivityDetailsCompanion Function({
+      Value<int> contentId,
+      required String subjectLabel,
+      required String activityLabel,
+      required String ctaLabel,
+      required String difficulty,
+      required int questionCount,
+      required int estimatedMinutes,
+      required String learningGoals,
+    });
+typedef $$ContentActivityDetailsTableUpdateCompanionBuilder =
+    ContentActivityDetailsCompanion Function({
+      Value<int> contentId,
+      Value<String> subjectLabel,
+      Value<String> activityLabel,
+      Value<String> ctaLabel,
+      Value<String> difficulty,
+      Value<int> questionCount,
+      Value<int> estimatedMinutes,
+      Value<String> learningGoals,
+    });
+
+final class $$ContentActivityDetailsTableReferences
+    extends
+        BaseReferences<
+          _$AppDatabase,
+          $ContentActivityDetailsTable,
+          ContentActivityDetail
+        > {
+  $$ContentActivityDetailsTableReferences(
+    super.$_db,
+    super.$_table,
+    super.$_typedResult,
+  );
+
+  static $ContentsTable _contentIdTable(_$AppDatabase db) =>
+      db.contents.createAlias(
+        $_aliasNameGenerator(
+          db.contentActivityDetails.contentId,
+          db.contents.id,
+        ),
+      );
+
+  $$ContentsTableProcessedTableManager get contentId {
+    final $_column = $_itemColumn<int>('content_id')!;
+
+    final manager = $$ContentsTableTableManager(
+      $_db,
+      $_db.contents,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_contentIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
+}
+
+class $$ContentActivityDetailsTableFilterComposer
+    extends Composer<_$AppDatabase, $ContentActivityDetailsTable> {
+  $$ContentActivityDetailsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get subjectLabel => $composableBuilder(
+    column: $table.subjectLabel,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get activityLabel => $composableBuilder(
+    column: $table.activityLabel,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get ctaLabel => $composableBuilder(
+    column: $table.ctaLabel,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get difficulty => $composableBuilder(
+    column: $table.difficulty,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get questionCount => $composableBuilder(
+    column: $table.questionCount,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get estimatedMinutes => $composableBuilder(
+    column: $table.estimatedMinutes,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get learningGoals => $composableBuilder(
+    column: $table.learningGoals,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  $$ContentsTableFilterComposer get contentId {
+    final $$ContentsTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.contentId,
+      referencedTable: $db.contents,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ContentsTableFilterComposer(
+            $db: $db,
+            $table: $db.contents,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$ContentActivityDetailsTableOrderingComposer
+    extends Composer<_$AppDatabase, $ContentActivityDetailsTable> {
+  $$ContentActivityDetailsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get subjectLabel => $composableBuilder(
+    column: $table.subjectLabel,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get activityLabel => $composableBuilder(
+    column: $table.activityLabel,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get ctaLabel => $composableBuilder(
+    column: $table.ctaLabel,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get difficulty => $composableBuilder(
+    column: $table.difficulty,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get questionCount => $composableBuilder(
+    column: $table.questionCount,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get estimatedMinutes => $composableBuilder(
+    column: $table.estimatedMinutes,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get learningGoals => $composableBuilder(
+    column: $table.learningGoals,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  $$ContentsTableOrderingComposer get contentId {
+    final $$ContentsTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.contentId,
+      referencedTable: $db.contents,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ContentsTableOrderingComposer(
+            $db: $db,
+            $table: $db.contents,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$ContentActivityDetailsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $ContentActivityDetailsTable> {
+  $$ContentActivityDetailsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get subjectLabel => $composableBuilder(
+    column: $table.subjectLabel,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get activityLabel => $composableBuilder(
+    column: $table.activityLabel,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get ctaLabel =>
+      $composableBuilder(column: $table.ctaLabel, builder: (column) => column);
+
+  GeneratedColumn<String> get difficulty => $composableBuilder(
+    column: $table.difficulty,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get questionCount => $composableBuilder(
+    column: $table.questionCount,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get estimatedMinutes => $composableBuilder(
+    column: $table.estimatedMinutes,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get learningGoals => $composableBuilder(
+    column: $table.learningGoals,
+    builder: (column) => column,
+  );
+
+  $$ContentsTableAnnotationComposer get contentId {
+    final $$ContentsTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.contentId,
+      referencedTable: $db.contents,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ContentsTableAnnotationComposer(
+            $db: $db,
+            $table: $db.contents,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$ContentActivityDetailsTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $ContentActivityDetailsTable,
+          ContentActivityDetail,
+          $$ContentActivityDetailsTableFilterComposer,
+          $$ContentActivityDetailsTableOrderingComposer,
+          $$ContentActivityDetailsTableAnnotationComposer,
+          $$ContentActivityDetailsTableCreateCompanionBuilder,
+          $$ContentActivityDetailsTableUpdateCompanionBuilder,
+          (ContentActivityDetail, $$ContentActivityDetailsTableReferences),
+          ContentActivityDetail,
+          PrefetchHooks Function({bool contentId})
+        > {
+  $$ContentActivityDetailsTableTableManager(
+    _$AppDatabase db,
+    $ContentActivityDetailsTable table,
+  ) : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$ContentActivityDetailsTableFilterComposer(
+                $db: db,
+                $table: table,
+              ),
+          createOrderingComposer: () =>
+              $$ContentActivityDetailsTableOrderingComposer(
+                $db: db,
+                $table: table,
+              ),
+          createComputedFieldComposer: () =>
+              $$ContentActivityDetailsTableAnnotationComposer(
+                $db: db,
+                $table: table,
+              ),
+          updateCompanionCallback:
+              ({
+                Value<int> contentId = const Value.absent(),
+                Value<String> subjectLabel = const Value.absent(),
+                Value<String> activityLabel = const Value.absent(),
+                Value<String> ctaLabel = const Value.absent(),
+                Value<String> difficulty = const Value.absent(),
+                Value<int> questionCount = const Value.absent(),
+                Value<int> estimatedMinutes = const Value.absent(),
+                Value<String> learningGoals = const Value.absent(),
+              }) => ContentActivityDetailsCompanion(
+                contentId: contentId,
+                subjectLabel: subjectLabel,
+                activityLabel: activityLabel,
+                ctaLabel: ctaLabel,
+                difficulty: difficulty,
+                questionCount: questionCount,
+                estimatedMinutes: estimatedMinutes,
+                learningGoals: learningGoals,
+              ),
+          createCompanionCallback:
+              ({
+                Value<int> contentId = const Value.absent(),
+                required String subjectLabel,
+                required String activityLabel,
+                required String ctaLabel,
+                required String difficulty,
+                required int questionCount,
+                required int estimatedMinutes,
+                required String learningGoals,
+              }) => ContentActivityDetailsCompanion.insert(
+                contentId: contentId,
+                subjectLabel: subjectLabel,
+                activityLabel: activityLabel,
+                ctaLabel: ctaLabel,
+                difficulty: difficulty,
+                questionCount: questionCount,
+                estimatedMinutes: estimatedMinutes,
+                learningGoals: learningGoals,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable(table),
+                  $$ContentActivityDetailsTableReferences(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: ({contentId = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [],
+              addJoins:
+                  <
+                    T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic
+                    >
+                  >(state) {
+                    if (contentId) {
+                      state =
+                          state.withJoin(
+                                currentTable: table,
+                                currentColumn: table.contentId,
+                                referencedTable:
+                                    $$ContentActivityDetailsTableReferences
+                                        ._contentIdTable(db),
+                                referencedColumn:
+                                    $$ContentActivityDetailsTableReferences
+                                        ._contentIdTable(db)
+                                        .id,
+                              )
+                              as T;
+                    }
+
+                    return state;
+                  },
+              getPrefetchedDataCallback: (items) async {
+                return [];
+              },
+            );
+          },
+        ),
+      );
+}
+
+typedef $$ContentActivityDetailsTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $ContentActivityDetailsTable,
+      ContentActivityDetail,
+      $$ContentActivityDetailsTableFilterComposer,
+      $$ContentActivityDetailsTableOrderingComposer,
+      $$ContentActivityDetailsTableAnnotationComposer,
+      $$ContentActivityDetailsTableCreateCompanionBuilder,
+      $$ContentActivityDetailsTableUpdateCompanionBuilder,
+      (ContentActivityDetail, $$ContentActivityDetailsTableReferences),
+      ContentActivityDetail,
+      PrefetchHooks Function({bool contentId})
+    >;
+typedef $$ContentQuestionsTableCreateCompanionBuilder =
+    ContentQuestionsCompanion Function({
+      Value<int> id,
+      required int contentId,
+      required int sortOrder,
+      required String typeLabel,
+      required String prompt,
+      required String optionsText,
+      required int correctIndex,
+    });
+typedef $$ContentQuestionsTableUpdateCompanionBuilder =
+    ContentQuestionsCompanion Function({
+      Value<int> id,
+      Value<int> contentId,
+      Value<int> sortOrder,
+      Value<String> typeLabel,
+      Value<String> prompt,
+      Value<String> optionsText,
+      Value<int> correctIndex,
+    });
+
+final class $$ContentQuestionsTableReferences
+    extends
+        BaseReferences<_$AppDatabase, $ContentQuestionsTable, ContentQuestion> {
+  $$ContentQuestionsTableReferences(
+    super.$_db,
+    super.$_table,
+    super.$_typedResult,
+  );
+
+  static $ContentsTable _contentIdTable(_$AppDatabase db) =>
+      db.contents.createAlias(
+        $_aliasNameGenerator(db.contentQuestions.contentId, db.contents.id),
+      );
+
+  $$ContentsTableProcessedTableManager get contentId {
+    final $_column = $_itemColumn<int>('content_id')!;
+
+    final manager = $$ContentsTableTableManager(
+      $_db,
+      $_db.contents,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_contentIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
+}
+
+class $$ContentQuestionsTableFilterComposer
+    extends Composer<_$AppDatabase, $ContentQuestionsTable> {
+  $$ContentQuestionsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get sortOrder => $composableBuilder(
+    column: $table.sortOrder,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get typeLabel => $composableBuilder(
+    column: $table.typeLabel,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get prompt => $composableBuilder(
+    column: $table.prompt,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get optionsText => $composableBuilder(
+    column: $table.optionsText,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get correctIndex => $composableBuilder(
+    column: $table.correctIndex,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  $$ContentsTableFilterComposer get contentId {
+    final $$ContentsTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.contentId,
+      referencedTable: $db.contents,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ContentsTableFilterComposer(
+            $db: $db,
+            $table: $db.contents,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$ContentQuestionsTableOrderingComposer
+    extends Composer<_$AppDatabase, $ContentQuestionsTable> {
+  $$ContentQuestionsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get sortOrder => $composableBuilder(
+    column: $table.sortOrder,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get typeLabel => $composableBuilder(
+    column: $table.typeLabel,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get prompt => $composableBuilder(
+    column: $table.prompt,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get optionsText => $composableBuilder(
+    column: $table.optionsText,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get correctIndex => $composableBuilder(
+    column: $table.correctIndex,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  $$ContentsTableOrderingComposer get contentId {
+    final $$ContentsTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.contentId,
+      referencedTable: $db.contents,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ContentsTableOrderingComposer(
+            $db: $db,
+            $table: $db.contents,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$ContentQuestionsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $ContentQuestionsTable> {
+  $$ContentQuestionsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<int> get sortOrder =>
+      $composableBuilder(column: $table.sortOrder, builder: (column) => column);
+
+  GeneratedColumn<String> get typeLabel =>
+      $composableBuilder(column: $table.typeLabel, builder: (column) => column);
+
+  GeneratedColumn<String> get prompt =>
+      $composableBuilder(column: $table.prompt, builder: (column) => column);
+
+  GeneratedColumn<String> get optionsText => $composableBuilder(
+    column: $table.optionsText,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get correctIndex => $composableBuilder(
+    column: $table.correctIndex,
+    builder: (column) => column,
+  );
+
+  $$ContentsTableAnnotationComposer get contentId {
+    final $$ContentsTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.contentId,
+      referencedTable: $db.contents,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ContentsTableAnnotationComposer(
+            $db: $db,
+            $table: $db.contents,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$ContentQuestionsTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $ContentQuestionsTable,
+          ContentQuestion,
+          $$ContentQuestionsTableFilterComposer,
+          $$ContentQuestionsTableOrderingComposer,
+          $$ContentQuestionsTableAnnotationComposer,
+          $$ContentQuestionsTableCreateCompanionBuilder,
+          $$ContentQuestionsTableUpdateCompanionBuilder,
+          (ContentQuestion, $$ContentQuestionsTableReferences),
+          ContentQuestion,
+          PrefetchHooks Function({bool contentId})
+        > {
+  $$ContentQuestionsTableTableManager(
+    _$AppDatabase db,
+    $ContentQuestionsTable table,
+  ) : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$ContentQuestionsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$ContentQuestionsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$ContentQuestionsTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<int> contentId = const Value.absent(),
+                Value<int> sortOrder = const Value.absent(),
+                Value<String> typeLabel = const Value.absent(),
+                Value<String> prompt = const Value.absent(),
+                Value<String> optionsText = const Value.absent(),
+                Value<int> correctIndex = const Value.absent(),
+              }) => ContentQuestionsCompanion(
+                id: id,
+                contentId: contentId,
+                sortOrder: sortOrder,
+                typeLabel: typeLabel,
+                prompt: prompt,
+                optionsText: optionsText,
+                correctIndex: correctIndex,
+              ),
+          createCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                required int contentId,
+                required int sortOrder,
+                required String typeLabel,
+                required String prompt,
+                required String optionsText,
+                required int correctIndex,
+              }) => ContentQuestionsCompanion.insert(
+                id: id,
+                contentId: contentId,
+                sortOrder: sortOrder,
+                typeLabel: typeLabel,
+                prompt: prompt,
+                optionsText: optionsText,
+                correctIndex: correctIndex,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable(table),
+                  $$ContentQuestionsTableReferences(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: ({contentId = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [],
+              addJoins:
+                  <
+                    T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic
+                    >
+                  >(state) {
+                    if (contentId) {
+                      state =
+                          state.withJoin(
+                                currentTable: table,
+                                currentColumn: table.contentId,
+                                referencedTable:
+                                    $$ContentQuestionsTableReferences
+                                        ._contentIdTable(db),
+                                referencedColumn:
+                                    $$ContentQuestionsTableReferences
+                                        ._contentIdTable(db)
+                                        .id,
+                              )
+                              as T;
+                    }
+
+                    return state;
+                  },
+              getPrefetchedDataCallback: (items) async {
+                return [];
+              },
+            );
+          },
+        ),
+      );
+}
+
+typedef $$ContentQuestionsTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $ContentQuestionsTable,
+      ContentQuestion,
+      $$ContentQuestionsTableFilterComposer,
+      $$ContentQuestionsTableOrderingComposer,
+      $$ContentQuestionsTableAnnotationComposer,
+      $$ContentQuestionsTableCreateCompanionBuilder,
+      $$ContentQuestionsTableUpdateCompanionBuilder,
+      (ContentQuestion, $$ContentQuestionsTableReferences),
+      ContentQuestion,
+      PrefetchHooks Function({bool contentId})
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -2766,4 +4764,11 @@ class $AppDatabaseManager {
   $$NewsTableTableManager get news => $$NewsTableTableManager(_db, _db.news);
   $$ProgressTableTableManager get progress =>
       $$ProgressTableTableManager(_db, _db.progress);
+  $$ContentActivityDetailsTableTableManager get contentActivityDetails =>
+      $$ContentActivityDetailsTableTableManager(
+        _db,
+        _db.contentActivityDetails,
+      );
+  $$ContentQuestionsTableTableManager get contentQuestions =>
+      $$ContentQuestionsTableTableManager(_db, _db.contentQuestions);
 }
