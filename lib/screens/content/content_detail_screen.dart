@@ -21,7 +21,6 @@ class ContentDetailScreen extends StatefulWidget {
 class _ContentDetailScreenState extends State<ContentDetailScreen> {
   bool _isCompleted = false;
   bool _isLoading = true;
-  bool _isSaving = false;
   ContentActivityDetail? _activityDetails;
   List<ContentQuestion> _questions = const [];
 
@@ -51,36 +50,6 @@ class _ContentDetailScreenState extends State<ContentDetailScreen> {
       _questions = questions;
       _isLoading = false;
     });
-  }
-
-  Future<void> _markAsCompleted() async {
-    if (_isCompleted || _isSaving) {
-      return;
-    }
-
-    setState(() {
-      _isSaving = true;
-    });
-
-    await appDatabase.markContentAsCompleted(
-      userId: widget.userId,
-      contentId: widget.content.id,
-    );
-
-    if (!mounted) {
-      return;
-    }
-
-    setState(() {
-      _isCompleted = true;
-      _isSaving = false;
-    });
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Contenido marcado como completado.'),
-      ),
-    );
   }
 
   Future<void> _openActivity() async {
@@ -140,26 +109,27 @@ class _ContentDetailScreenState extends State<ContentDetailScreen> {
                 label: Text(metadata.ctaLabel),
               ),
             ),
-            const SizedBox(height: 10),
-            SizedBox(
-              height: 50,
-              width: double.infinity,
-              child: OutlinedButton.icon(
-                onPressed: (_isCompleted || _isSaving) ? null : _markAsCompleted,
-                icon: Icon(
-                  _isCompleted
-                      ? Icons.check_circle_outline
-                      : Icons.task_alt_outlined,
-                ),
-                label: Text(
-                  _isCompleted
-                      ? 'Ya completaste esta actividad'
-                      : (_isSaving
-                            ? 'Guardando avance...'
-                            : 'Marcar como completado'),
-                ),
+            if (!_isCompleted) ...[
+              const SizedBox(height: 10),
+              Text(
+                'La actividad se marcara como completada automaticamente al finalizar.',
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: const Color(0xFF5C675F),
+                      height: 1.35,
+                    ),
               ),
-            ),
+            ] else ...[
+              const SizedBox(height: 10),
+              Text(
+                'Esta actividad ya fue completada. Puedes abrirla otra vez para practicar.',
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: const Color(0xFF2F6B52),
+                      height: 1.35,
+                    ),
+              ),
+            ],
           ],
         ),
       ),

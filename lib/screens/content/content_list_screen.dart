@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:aplicacion_educativa/data/database.dart';
 import 'package:aplicacion_educativa/screens/content/content_activity_support.dart';
 import 'package:aplicacion_educativa/screens/content/content_detail_screen.dart';
@@ -31,12 +33,21 @@ class ContentListView extends StatefulWidget {
 
 class _ContentListViewState extends State<ContentListView> {
   Future<_DashboardData>? _dashboardFuture;
-  String? _selectedCategory;
+  final TextEditingController _searchController = TextEditingController();
+  Timer? _searchDebounce;
+  String _searchQuery = '';
 
   @override
   void initState() {
     super.initState();
     _dashboardFuture = _loadData();
+  }
+
+  @override
+  void dispose() {
+    _searchDebounce?.cancel();
+    _searchController.dispose();
+    super.dispose();
   }
 
   Future<_DashboardData> _loadData() async {
@@ -58,9 +69,22 @@ class _ContentListViewState extends State<ContentListView> {
         .map((item) => item.contentId)
         .toSet();
 
-    final filteredContents = _selectedCategory == null
+    final query = _searchQuery.trim().toLowerCase();
+    final filteredContents = query.isEmpty
         ? allContents
-        : await appDatabase.getContentsByCategory(_selectedCategory!);
+        : allContents.where((content) {
+            final details = activityDetailsMap[content.id];
+            final haystack = [
+              content.title,
+              content.description ?? '',
+              content.category ?? '',
+              content.type,
+              details?.subjectLabel ?? '',
+              details?.activityLabel ?? '',
+            ].join(' ').toLowerCase();
+
+            return haystack.contains(query);
+          }).toList();
 
     final pendingContents = filteredContents
         .where((content) => !completedContentIds.contains(content.id))
@@ -75,22 +99,15 @@ class _ContentListViewState extends State<ContentListView> {
         ? pendingContents
         : pendingContents.skip(1).toList();
     final recommendedContents = remainingPending.take(3).toList();
-    final categories = allContents
-        .map((content) => content.category?.trim() ?? '')
-        .where((category) => category.isNotEmpty)
-        .toSet()
-        .toList()
-      ..sort();
-
     return _DashboardData(
       currentUser: currentUser,
-      categories: categories,
       continueLearning: continueLearning,
       pendingContents: remainingPending,
       recommendedContents: recommendedContents,
       completedContents: completedContents,
       completedContentIds: completedContentIds,
       activityDetailsMap: activityDetailsMap,
+      searchQuery: _searchQuery,
     );
   }
 
@@ -142,7 +159,13 @@ class _ContentListViewState extends State<ContentListView> {
               children: [
                 _HeaderBlock(userName: data.currentUser.name),
                 const SizedBox(height: 18),
-                _buildFilters(data.categories),
+                _SearchBlock(
+                  controller: _searchController,
+                  initialValue: data.searchQuery,
+                  onChanged: _handleSearchChanged,
+                  onSubmitted: _applySearchNow,
+                  onClear: _clearSearch,
+                ),
                 const SizedBox(height: 18),
                 if (data.continueLearning != null) ...[
                   _SectionTitle(
@@ -169,9 +192,13 @@ class _ContentListViewState extends State<ContentListView> {
                 ),
                 const SizedBox(height: 12),
                 if (data.pendingContents.isEmpty)
-                  const _EmptySection(
-                    title: 'No tienes pendientes en este filtro.',
-                    body: 'Prueba otra materia o revisa tus actividades completadas.',
+                  _EmptySection(
+                    title: data.searchQuery.isEmpty
+                        ? 'No tienes actividades pendientes.'
+                        : 'No encontramos pendientes para esa busqueda.',
+                    body: data.searchQuery.isEmpty
+                        ? 'Cuando termines nuevas actividades, tu avance se organizara aqui.'
+                        : 'Prueba con otra palabra o revisa tus actividades completadas.',
                   )
                 else
                   _PendingGrid(
@@ -259,35 +286,34 @@ class _ContentListViewState extends State<ContentListView> {
     );
   }
 
-  Widget _buildFilters(List<String> categories) {
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: [
-        FilterChip(
-          label: const Text('Todos'),
-          selected: _selectedCategory == null,
-          onSelected: (_) {
-            setState(() {
-              _selectedCategory = null;
-              _dashboardFuture = _loadData();
-            });
-          },
-        ),
-        for (final category in categories)
-          FilterChip(
-            label: Text(category),
-            selected: _selectedCategory == category,
-            onSelected: (_) {
-              setState(() {
-                _selectedCategory =
-                    _selectedCategory == category ? null : category;
-                _dashboardFuture = _loadData();
-              });
-            },
-          ),
-      ],
-    );
+  void _handleSearchChanged(String value) {
+    _searchDebounce?.cancel();
+    _searchDebounce = Timer(const Duration(milliseconds: 450), () {
+      _applySearch(value);
+    });
+  }
+
+  void _applySearchNow(String value) {
+    _searchDebounce?.cancel();
+    _applySearch(value);
+  }
+
+  void _clearSearch() {
+    _searchDebounce?.cancel();
+    _searchController.clear();
+    _applySearch('');
+  }
+
+  void _applySearch(String value) {
+    final normalized = value.trim();
+    if (normalized == _searchQuery) {
+      return;
+    }
+
+    setState(() {
+      _searchQuery = normalized;
+      _dashboardFuture = _loadData();
+    });
   }
 
   Future<void> _openDetail({
@@ -411,6 +437,81 @@ class _HeaderBlock extends StatelessWidget {
                 ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _SearchBlock extends StatelessWidget {
+  const _SearchBlock({
+    required this.controller,
+    required this.initialValue,
+    required this.onChanged,
+    required this.onSubmitted,
+    required this.onClear,
+  });
+
+  final TextEditingController controller;
+  final String initialValue;
+  final ValueChanged<String> onChanged;
+  final ValueChanged<String> onSubmitted;
+  final VoidCallback onClear;
+
+  @override
+  Widget build(BuildContext context) {
+    if (controller.text != initialValue) {
+      controller.value = controller.value.copyWith(
+        text: initialValue,
+        selection: TextSelection.collapsed(offset: initialValue.length),
+        composing: TextRange.empty,
+      );
+    }
+
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: const Color(0xFFFFFDF9),
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(color: const Color(0xFFD8D2C8)),
+      ),
+      child: ValueListenableBuilder<TextEditingValue>(
+        valueListenable: controller,
+        builder: (context, value, _) {
+          return TextField(
+            controller: controller,
+            onChanged: onChanged,
+            onSubmitted: onSubmitted,
+            textInputAction: TextInputAction.search,
+            decoration: InputDecoration(
+              hintText: 'Buscar por titulo, materia o actividad',
+              prefixIcon: const Icon(Icons.search_rounded),
+              suffixIcon: value.text.isEmpty
+                  ? null
+                  : IconButton(
+                      onPressed: onClear,
+                      tooltip: 'Limpiar busqueda',
+                      icon: const Icon(Icons.close_rounded),
+                    ),
+              filled: true,
+              fillColor: const Color(0xFFF6F1E8),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(18),
+                borderSide: const BorderSide(color: Color(0xFFD8D2C8)),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(18),
+                borderSide: const BorderSide(color: Color(0xFFD8D2C8)),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(18),
+                borderSide: const BorderSide(
+                  color: Color(0xFF2F6B52),
+                  width: 1.5,
+                ),
+              ),
+            ),
+          );
+        },
       ),
     );
   }
@@ -996,21 +1097,21 @@ class _StateMessage extends StatelessWidget {
 class _DashboardData {
   const _DashboardData({
     required this.currentUser,
-    required this.categories,
     required this.continueLearning,
     required this.pendingContents,
     required this.recommendedContents,
     required this.completedContents,
     required this.completedContentIds,
     required this.activityDetailsMap,
+    required this.searchQuery,
   });
 
   final User currentUser;
-  final List<String> categories;
   final Content? continueLearning;
   final List<Content> pendingContents;
   final List<Content> recommendedContents;
   final List<Content> completedContents;
   final Set<int> completedContentIds;
   final Map<int, ContentActivityDetail> activityDetailsMap;
+  final String searchQuery;
 }
