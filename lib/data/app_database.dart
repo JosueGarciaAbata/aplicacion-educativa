@@ -226,6 +226,43 @@ class AppDatabase extends _$AppDatabase {
         .get();
   }
 
+  Future<void> ensureSampleNews() async {
+    final existingNews = await getAllNews();
+    if (existingNews.isNotEmpty) {
+      return;
+    }
+
+    await insertNewsItem(
+      title: 'Jornada de lectura comunitaria este lunes',
+      body:
+          'Este lunes realizaremos una jornada de lectura comunitaria en la escuela. '
+          'Cada estudiante podra llevar su cuaderno y participar en una lectura guiada '
+          'sobre historias de la comunidad. La actividad busca fortalecer la comprension '
+          'lectora y compartir experiencias entre companeros y familias.',
+      publishedAt: DateTime(2026, 3, 20, 8, 30).toIso8601String(),
+    );
+
+    await insertNewsItem(
+      title: 'Entrega de actividades de matematicas',
+      body:
+          'Las actividades de matematicas de esta semana estaran disponibles en la app '
+          'y tambien podran revisarse en clase. Se recomienda practicar sumas y restas '
+          'antes del viernes para llegar mejor preparados. Si ya completaste una actividad, '
+          'tu avance quedara registrado en el dispositivo.',
+      publishedAt: DateTime(2026, 3, 18, 10, 0).toIso8601String(),
+    );
+
+    await insertNewsItem(
+      title: 'Cuidado del huerto escolar',
+      body:
+          'Durante esta semana continuaremos con el cuidado del huerto escolar. '
+          'Las y los estudiantes aprenderan sobre riego responsable, observacion de plantas '
+          'y registro de cambios en el crecimiento. Esta actividad se relaciona con los '
+          'contenidos de ciencias y promueve el trabajo colaborativo.',
+      publishedAt: DateTime(2026, 3, 15, 9, 15).toIso8601String(),
+    );
+  }
+
   Future<int> saveProgress({
     required int userId,
     required int contentId,

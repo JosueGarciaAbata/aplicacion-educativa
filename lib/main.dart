@@ -8,6 +8,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await appDatabase.ensureDefaultUser();
   await appDatabase.ensureSampleContents();
+  await appDatabase.ensureSampleNews();
   await appDatabase.ensureSampleActivityData();
   final savedUsername = await SessionManager.getUsername();
   final savedUser = savedUsername == null
