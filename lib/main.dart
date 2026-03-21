@@ -1,3 +1,4 @@
+import 'package:aplicacion_educativa/data/database.dart';
 import 'package:aplicacion_educativa/screens/home_screen.dart';
 import 'package:aplicacion_educativa/screens/login_screen.dart';
 import 'package:aplicacion_educativa/services/session_manager.dart';
@@ -5,15 +6,21 @@ import 'package:flutter/material.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await appDatabase.ensureDefaultUser();
+  await appDatabase.ensureSampleContents();
+  await appDatabase.ensureSampleActivityData();
   final savedUsername = await SessionManager.getUsername();
+  final savedUser = savedUsername == null
+      ? null
+      : await appDatabase.getSessionUser(savedUsername);
 
-  runApp(MyApp(initialUsername: savedUsername));
+  runApp(MyApp(initialDisplayName: savedUser?.name));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key, required this.initialUsername});
+  const MyApp({super.key, required this.initialDisplayName});
 
-  final String? initialUsername;
+  final String? initialDisplayName;
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +31,9 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
-      home: initialUsername == null
+      home: initialDisplayName == null
           ? const LoginScreen()
-          : HomeScreen(username: initialUsername!),
+          : const HomeScreen(),
     );
   }
 }
